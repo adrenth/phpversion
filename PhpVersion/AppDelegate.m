@@ -17,14 +17,15 @@
 @synthesize statusMenu = _statusMenu;
 
 - (void) awakeFromNib {
-    self.statusBar = [[NSStatusBar systemStatusBar]statusItemWithLength:NSVariableStatusItemLength];
+    self.statusBar = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
     
     NSString *version = [self refreshVersion];
-    self.statusBar.title = version;
     
     self.statusBar.menu = self.statusMenu;
     self.statusBar.highlightMode = YES;
 
+    [self updateStatusBarTitle:version];
+    
     [NSTimer scheduledTimerWithTimeInterval:10.0f
                                      target:self selector:@selector(updateStatusBar:) userInfo:nil repeats:YES];
 }
@@ -36,11 +37,24 @@
 - (void)updateStatusBar:(NSTimer *)timer {
     @try {
         NSString *version = [self refreshVersion];
-        self.statusBar.title = version;
+        [self updateStatusBarTitle:version];
     }
     @catch (NSException *e) {
-        
+        NSLog(@"%@", [e description]);
     }
+}
+
+- (void)updateStatusBarTitle:(NSString *)title
+{
+    NSDictionary *titleAttributes = @{
+                                      NSForegroundColorAttributeName: [NSColor darkGrayColor],
+                                      NSFontAttributeName: [NSFont fontWithName:@"Helvetica-Light" size:13.0f],
+                                      };
+    
+    NSAttributedString* blueTitle = [[NSAttributedString alloc] initWithString:title
+                                                                    attributes:titleAttributes];
+    
+    [self.statusBar setAttributedTitle:blueTitle];
 }
 
 - (NSString *)refreshVersion {
@@ -57,8 +71,18 @@
     [file closeFile];
     
     NSString *output = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+
+    bool notFound = true;
+    int index = 4;
     
-    return [output substringWithRange:NSMakeRange(4, 3)];
+    while (notFound) {
+        if ([output characterAtIndex:index] == 32) {
+            notFound = false;
+        }
+        index++;
+    }
+    
+    return [output substringWithRange:NSMakeRange(4, index - 4)];
 }
 
 @end
