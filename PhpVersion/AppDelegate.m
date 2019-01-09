@@ -22,12 +22,34 @@
     NSString *version = [self refreshVersion];
     
     self.statusBar.menu = self.statusMenu;
-    self.statusBar.highlightMode = YES;
 
     [self updateStatusBarTitle:version];
     
     [NSTimer scheduledTimerWithTimeInterval:10.0f
-                                     target:self selector:@selector(updateStatusBar:) userInfo:nil repeats:YES];
+                                     target:self
+                                   selector:@selector(updateStatusBar:)
+                                   userInfo:nil
+                                    repeats:YES];
+}
+
+- (IBAction)php70Clicked:(id)sender {
+    [self runPhpSwitcher:@"7.0"];
+}
+
+- (IBAction)php71Clicked:(id)sender {
+    [self runPhpSwitcher:@"7.1"];
+}
+
+- (IBAction)php72Clicked:(id)sender {
+    [self runPhpSwitcher:@"7.2"];
+}
+
+- (IBAction)php73Clicked:(id)sender {
+    [self runPhpSwitcher:@"7.3"];
+}
+
+- (void)runPhpSwitcher:(NSString *)version {
+    //[NSWorkspace.sharedWorkspace openURL:[NSURL fileURLWithPath:@"/Applications/iTerm.app"]];
 }
 
 - (IBAction)quitClicked:(id)sender {
@@ -47,14 +69,14 @@
 - (void)updateStatusBarTitle:(NSString *)title
 {
     NSDictionary *titleAttributes = @{
-                                      NSForegroundColorAttributeName: [NSColor darkGrayColor],
-                                      NSFontAttributeName: [NSFont fontWithName:@"Helvetica-Light" size:13.0f],
+                                      NSForegroundColorAttributeName: [NSColor alternateSelectedControlColor],
+                                      NSFontAttributeName: [NSFont fontWithName:@"Helvetica" size:14.0f],
                                       };
     
     NSAttributedString* blueTitle = [[NSAttributedString alloc] initWithString:title
                                                                     attributes:titleAttributes];
     
-    [self.statusBar setAttributedTitle:blueTitle];
+    [self.statusBar.button setAttributedTitle:blueTitle];
 }
 
 - (NSString *)refreshVersion {

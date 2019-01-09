@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AppDelegate"/>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <customObject id="-3" userLabel="Application"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate">
             <connections>
@@ -16,14 +15,33 @@
         </customObject>
         <menu title="PhpVersion" autoenablesItems="NO" id="ymh-Tu-ozE">
             <items>
-                <menuItem title="Quit" id="9A4-bE-IgT">
-                    <modifierMask key="keyEquivalentModifierMask"/>
+                <menuItem title="php 7.0" hidden="YES" keyEquivalent="0" id="erT-XM-5kl">
+                    <connections>
+                        <action selector="php70Clicked:" target="Voe-Tx-rLC" id="XiC-fv-cg1"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="php 7.1" hidden="YES" keyEquivalent="1" id="gZj-JA-mfP">
+                    <connections>
+                        <action selector="php71Clicked:" target="Voe-Tx-rLC" id="Bec-jy-Swb"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="php 7.2" hidden="YES" keyEquivalent="2" id="Nbn-IK-IXq">
+                    <connections>
+                        <action selector="php72Clicked:" target="Voe-Tx-rLC" id="1gp-Tv-Jg2"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="php 7.3" hidden="YES" keyEquivalent="3" id="hjn-eW-tJM">
+                    <connections>
+                        <action selector="php73Clicked:" target="Voe-Tx-rLC" id="50t-L3-f3E"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Quit version 1.2" keyEquivalent="q" id="9A4-bE-IgT">
                     <connections>
                         <action selector="quitClicked:" target="Voe-Tx-rLC" id="00v-VD-IQg"/>
                     </connections>
                 </menuItem>
             </items>
-            <point key="canvasLocation" x="-127" y="-191"/>
+            <point key="canvasLocation" x="-130.5" y="-120"/>
         </menu>
     </objects>
 </document>
